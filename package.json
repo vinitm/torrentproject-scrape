@@ -1,0 +1,19 @@
+{
+	"name": "torrentproject_scrape",
+	"private": true,
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"serve": "node index.js",
+		"start": "npm run serve"
+	},
+	"author": "Vinit Mav <mavvinit@gmail.com>",
+	"license": "ISC",
+	"dependencies": {
+		"cheerio": "^0.22.0",
+		"cloudscraper": "^1.4.0",
+		"express": "^4.14.0",
+		"x-ray": "^2.3.0"
+	}
+}
