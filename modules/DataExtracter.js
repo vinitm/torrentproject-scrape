@@ -1,9 +1,8 @@
 var cheerio = require('cheerio');
 
 var _extract = function(html) {
-	var obj = {};
+	var obj = [];
 	var $ = cheerio.load(html);
-	obj.torrents = [];
 	$('.torrent').each(function() {
 		var torrent = $(this);
 		var torrentObj = {};
@@ -14,7 +13,7 @@ var _extract = function(html) {
 		torrentObj.category = torrent.find('.cate').text().trim();
 		torrentObj.size = torrent.find('.torrent-size').text().trim().toUpperCase().trim();
 		torrentObj.magnet = 'magnet:?xt=urn:btih:' + torrent.find('.r a').attr('href').split('/')[1].trim() + '&dn=' + torrentObj.title.replace(/ /g, '_');
-		obj.torrents.push(torrentObj);
+		obj.push(torrentObj);
 	});
 	return obj;
 };

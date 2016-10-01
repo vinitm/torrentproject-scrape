@@ -10,9 +10,8 @@ app.get('/', function(req, res) {
 	cloudscraper.get(config.url + '/?' + query, function(error, response, html) {
 		if (error) {
 			console.log(error);
-			response.end(JSON.stringify(error));
+			response.end();
 		} else {
-			console.log('body received');
 			DataExtracter.extractFrom(html).send(res);
 		}
 	});
