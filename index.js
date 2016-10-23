@@ -3,7 +3,7 @@ var cloudscraper = require('cloudscraper');
 var config = require('./config');
 var querystring = require('querystring');
 var app = express();
-var fs = require('fs');
+var mock = require('./modules/mock');
 var DataExtracter = require('./modules/DataExtracter');
 
 app.get('/', function(req, res) {
@@ -19,14 +19,9 @@ app.get('/', function(req, res) {
 });
 
 app.get('/mock', function(req, res) {
-	fs.readFile('./modules/mock.json', function(err, data) {
-		if (err)
-			console.log(err);
-		else {
-			res.setHeader('Content-Type', 'application/json');
-			res.end(data);
-		}
-	});
+	var data = mock(req.query.s, 20);
+	res.setHeader('Content-Type', 'application/json');
+	res.end(JSON.stringify(data));
 });
 
 app.listen(config.port, function() {
