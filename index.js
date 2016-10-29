@@ -5,13 +5,13 @@ var querystring = require('querystring');
 var app = express();
 var mock = require('./modules/mock');
 var DataExtracter = require('./modules/DataExtracter');
+var ErrorHandler = require('./modules/ErrorHandler');
 
 app.get('/', function(req, res) {
 	var query = querystring.stringify(req.query);
 	cloudscraper.get(config.url + '/?' + query, function(error, response, html) {
 		if (error) {
-			console.log(error);
-			res.end();
+			ErrorHandler.handle(error).send(res);
 		} else {
 			DataExtracter.extractFrom(html).send(res);
 		}
