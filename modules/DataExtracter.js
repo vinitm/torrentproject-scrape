@@ -6,7 +6,9 @@ var _extract = function(html) {
 	$('.torrent').each(function() {
 		var torrent = $(this);
 		var torrentObj = {};
-		torrentObj.title = torrent.find('.r a').text().trim();
+		torrentObj.title = torrent.find('.r a').contents().filter(function() {
+			return this.nodeType === 3; //Node.TEXT_NODE
+		}).text().trim();
 		torrentObj.seeds = torrent.find('.seeders .gac_b').text().trim();
 		torrentObj.leechs = torrent.find('.leechers .gac_b').text().trim();
 		torrentObj.time_uploaded = torrent.find('.cated').text().trim();

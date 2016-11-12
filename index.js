@@ -6,6 +6,9 @@ var app = express();
 var mock = require('./modules/mock');
 var DataExtracter = require('./modules/DataExtracter');
 var ErrorHandler = require('./modules/ErrorHandler');
+var morgan = require('morgan');
+
+app.use(morgan('combined'));
 
 app.get('/', function(req, res) {
 	var query = querystring.stringify(req.query);
